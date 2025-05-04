@@ -1,7 +1,6 @@
 from constants import BINARY_LETTER_TABLE
 
 
-
 class BinaryConverter:
     def __init__(self, binary_letter_table: dict):
         self.binary_letter_table = binary_letter_table
@@ -13,14 +12,14 @@ class BinaryConverter:
         converted_letter = self.binary_letter_table[letter] + ' '
         return converted_letter
 
-    def letter_list_create(self,word: str) -> list:
+    def letter_list_create(self, word: str) -> list:
         """
         Creates a list of all letters in the given word
         """
         letter_list = [letter for letter in word]
         return letter_list
 
-    def symbol_presence_validate(self,letter: str) -> bool:
+    def symbol_presence_validate(self, letter: str) -> bool:
         """
         Returns a bool basing on whether the given letter is present in the BINARY_LETTER_TABLE
         """
@@ -28,31 +27,37 @@ class BinaryConverter:
             return True
         else:
             return False
-    def non_existent_symbols_listed(self,letter: str) -> list:
+
+    def non_existent_symbols_listed(self, letter: str) -> list:
         letter_table = self.letter_list_create(letter)
-        
+
         pass
 
-    def user_words_iterator(self,word: str) -> str:
+    def user_words_iterator(self, word: str) -> str:
         """
         Returns provided string in the utf-8 code
         """
-        output = ''
+        output = {'found': '', 'non_found': {}  }
         letter_table = self.letter_list_create(word)
-        for letter in letter_table:
+        for index,letter in enumerate(letter_table):
+
             if self.symbol_presence_validate(letter):
-                output += self.single_letter_convert(letter)
+                output['found'] += self.single_letter_convert(letter)
                 ' '.join(output)
             else:
-                print(f'Symbol not found: {letter}')
+                 output['non_found'][letter] = index
             # if letter in self.binary_letter_table:
             #     output += self.single_letter_convert(letter) + ' '
             # else:
             #     print(f"Symbol not found: {letter}")
-        return output
+
+        if output['found'] or output['non_found']:
+            return output
+
+
 
 
 converter = BinaryConverter(BINARY_LETTER_TABLE)
 # print(converter.single_letter_convert('['))
-print(converter.user_words_iterator('abc'))
-
+x   =  converter.user_words_iterator('*%*')
+print(x)
