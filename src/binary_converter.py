@@ -1,8 +1,9 @@
-from constants import BINARY_LETTER_TABLE
 from collections import defaultdict
+from constants import BINARY_LETTER_TABLE
 
 
 class BinaryConverter:
+
     def __init__(self, binary_letter_table: dict):
         self.binary_letter_table = binary_letter_table
 
@@ -29,11 +30,6 @@ class BinaryConverter:
         else:
             return False
 
-    # def non_existent_symbols_listed(self, letter: str) -> list:
-    #     letter_table = self.letter_list_create(letter)
-    #
-    #     pass
-
     def user_words_iterator(self, word: str) -> str:
         """
         Returns provided string in the utf-8 code
@@ -53,17 +49,12 @@ class BinaryConverter:
             else:
                  output['non_found'][letter].append(index)
 
-            # if letter in self.binary_letter_table:
-            #     output += self.single_letter_convert(letter) + ' '
-            # else:
-            #     print(f"Symbol not found: {letter}")
-
         if output['found'] or output['non_found']:
             return output
 
 
-
+# TESTING PURPOSES
 converter = BinaryConverter(BINARY_LETTER_TABLE)
 # print(converter.single_letter_convert('['))
-x   =  converter.user_words_iterator('a##a#!asa')
+x   =  converter.user_words_iterator('##1!')
 print(x)
