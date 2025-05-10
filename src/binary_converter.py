@@ -1,4 +1,5 @@
 from collections import defaultdict
+from output_handler import OutputHandler
 from constants import BINARY_LETTER_TABLE
 
 
@@ -6,6 +7,7 @@ class BinaryConverter:
 
     def __init__(self, binary_letter_table: dict):
         self.binary_letter_table = binary_letter_table
+        self.output_handler = OutputHandler()
 
     def single_letter_convert(self, letter: str) -> str:
         """
@@ -35,7 +37,7 @@ class BinaryConverter:
         Returns provided string in the utf-8 code
         """
         if word == '':
-            return 'String cant be empty'
+            self.output_handler.handle_empty_input()
 
         output = {'found': '', 'non_found': {}  }
         output['non_found'] = defaultdict(list)
@@ -56,5 +58,5 @@ class BinaryConverter:
 # TESTING PURPOSES
 converter = BinaryConverter(BINARY_LETTER_TABLE)
 # print(converter.single_letter_convert('['))
-x   =  converter.user_words_iterator('##1!')
+x   =  converter.user_words_iterator('')
 print(x)
