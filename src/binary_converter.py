@@ -39,8 +39,7 @@ class BinaryConverter:
         if word == '':
             self.output_handler.handle_empty_input()
 
-        output = {'found': '', 'non_found': {}  }
-        output['non_found'] = defaultdict(list)
+        output = {'found': '', 'non_found': defaultdict(list)}
 
         letter_table = self.letter_list_create(word)
         for index,letter in enumerate(letter_table):
@@ -51,12 +50,12 @@ class BinaryConverter:
             else:
                  output['non_found'][letter].append(index)
 
-        if output['found'] or output['non_found']:
-            return output
+        return self.output_handler.friendly_output_handler(output)
+
 
 
 # TESTING PURPOSES
 converter = BinaryConverter(BINARY_LETTER_TABLE)
 # print(converter.single_letter_convert('['))
-x   =  converter.user_words_iterator('')
+x   =  converter.user_words_iterator('abcd#A!')
 print(x)

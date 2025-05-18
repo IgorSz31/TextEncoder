@@ -8,5 +8,20 @@ class OutputHandler:
 
 
     def handle_empty_input(self):
-        print('a')
-        return 'String cant be empty'
+        """
+        Raises an Error when the input is empty.
+        """
+        raise ValueError('String cant be empty')
+
+    def friendly_output_handler(self, output):
+        """
+        Takes the output dictionary and makes it readable for user.
+        """
+        message = []
+        if output['found']:
+            message.append(f"Here is your text in UTF-8: {output['found']}")
+        if output['non_found']:
+            message.append(f"Here are the elements that could not be"
+                       f" found and their index number: {dict(output['non_found'])}")
+        new_line = '\n'.join(message)
+        return new_line
