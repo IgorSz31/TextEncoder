@@ -1,13 +1,14 @@
 from collections import defaultdict
 from output_handler import OutputHandler
 from constants import BINARY_LETTER_TABLE
-
+from program_status import Status
 
 class BinaryConverter:
 
-    def __init__(self, binary_letter_table: dict):
-        self.binary_letter_table = binary_letter_table
+    def __init__(self):
+        self.binary_letter_table = BINARY_LETTER_TABLE
         self.output_handler = OutputHandler()
+
 
     def single_letter_convert(self, letter: str) -> str:
         """
@@ -37,7 +38,8 @@ class BinaryConverter:
         Returns provided string in the utf-8 code
         """
         if word == '':
-            self.output_handler.handle_empty_input()
+            return {'status':Status.ERROR.value}
+            # self.output_handler.handle_empty_input()
 
         output = {'found': '', 'non_found': defaultdict(list)}
 
@@ -50,12 +52,13 @@ class BinaryConverter:
             else:
                  output['non_found'][letter].append(index)
 
-        return self.output_handler.friendly_output_handler(output)
+        return {'status': Status.SUCCESS.value,
+                'output':self.output_handler.friendly_output_handler(output)}
 
 
 
-# TESTING PURPOSES
-converter = BinaryConverter(BINARY_LETTER_TABLE)
-# print(converter.single_letter_convert('['))
-x   =  converter.user_words_iterator('abcd#A!')
-print(x)
+# # TESTING PURPOSES
+# converter = BinaryConverter(BINARY_LETTER_TABLE)
+#
+# x   =  converter.user_words_iterator('')
+# print(x['status'])
