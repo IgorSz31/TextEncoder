@@ -1,7 +1,7 @@
 from collections import defaultdict
-from output_handler import OutputHandler
-from constants import BINARY_LETTER_TABLE
-from program_status import Status
+from src.output_handler import OutputHandler
+from src.constants import BINARY_LETTER_TABLE
+from src.program_status import Status
 
 class BinaryConverter:
 
