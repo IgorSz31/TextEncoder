@@ -7,11 +7,6 @@ class OutputHandler:
         self.mode = mode
 
 
-    def handle_empty_input(self):
-        """
-        Raises an Error when the input is empty.
-        """
-        raise ValueError('String cant be empty')
 
     def friendly_output_handler(self, output):
         """

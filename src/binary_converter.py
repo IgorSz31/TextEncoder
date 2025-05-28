@@ -1,7 +1,8 @@
 from collections import defaultdict
 from src.output_handler import OutputHandler
 from src.constants import BINARY_LETTER_TABLE
-from src.program_status import Status
+from src.program_status import Status, ErrorMessage
+
 
 class BinaryConverter:
 
@@ -33,14 +34,15 @@ class BinaryConverter:
         else:
             return False
 
-    def user_words_iterator(self, word: str) -> str:
+    def user_words_iterator(self, word: str) -> dict:
         """
         Returns provided string in the utf-8 code
         """
         if word == '':
-            return {'status':Status.ERROR.value}
+            return {'status':Status.ERROR.value, 'output':ErrorMessage.EMPTYSTRING.value}
             # self.output_handler.handle_empty_input()
-
+        if word == 'exit()':
+            exit()
         output = {'found': '', 'non_found': defaultdict(list)}
 
         letter_table = self.letter_list_create(word)
