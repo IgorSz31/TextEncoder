@@ -2,14 +2,19 @@ from PySide6.QtWidgets import (QApplication, QWidget,
                                QMainWindow, QPushButton,
                                QLineEdit, QVBoxLayout, QLabel)
 import sys
+from src.binary_converter import BinaryConverter
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.converter = BinaryConverter()
+
         self.setWindowTitle('Text Encoder')  # Window Title
         self.label = QLabel(self)
+        self.label.setText('Enter string: ')
+
 
         self.input = QLineEdit(self)
         self.button = QPushButton('Encode')  # Button
@@ -27,7 +32,11 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(container)
 
     def btn_clicked(self):
-        print('hello world')
+        x = self.converter.user_words_iterator(self.input.text())
+        self.label.setText(f'{x['status']} {x['output']}')
+
+
+
 
 # if __name__ == "__main__":
 #     app = QApplication(sys.argv)
