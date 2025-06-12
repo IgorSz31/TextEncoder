@@ -1,3 +1,4 @@
+from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (QApplication, QWidget,
                                QMainWindow, QPushButton,
                                QLineEdit, QVBoxLayout, QLabel)
@@ -14,26 +15,33 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Text Encoder')  # Window Title
         self.label = QLabel(self)
         self.label.setText('Enter string: ')
-
+        self.label.setWordWrap(True)
+        self.label.setTextInteractionFlags(Qt.TextSelectableByKeyboard|Qt.TextSelectableByMouse)
 
         self.input = QLineEdit(self)
         self.button = QPushButton('Encode')  # Button
         self.button.setCheckable(True)
         self.button.clicked.connect(self.btn_clicked)
 
+
         layout = QVBoxLayout() # Vertical Layout
         layout.addWidget(self.input)  #
         layout.addWidget(self.label)  #  Adding all widgets to layout
         layout.addWidget(self.button) #
 
+
+
         container = QWidget(self)
         container.setLayout(layout)
+
 
         self.setCentralWidget(container)
 
     def btn_clicked(self):
         x = self.converter.user_words_iterator(self.input.text())
         self.label.setText(f'{x['status']} {x['output']}')
+        self.label.setWordWrap(True)
+
 
 
 

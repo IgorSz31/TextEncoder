@@ -24,6 +24,7 @@ if __name__ == "__main__":
         from PySide6.QtWidgets import QApplication
         app = QApplication(sys.argv)
         window = MainWindow()
+        window.resize(250, 200)
         window.show()
         sys.exit(app.exec())
 
