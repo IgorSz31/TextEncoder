@@ -1,9 +1,14 @@
+import logging
+
+logger = logging.getLogger(__name__)
 
 class OutputHandler:
     def __init__(self, mode = 'standard'):
         valid_modes = ['standard', 'dev']
         if mode not in valid_modes:
+            logger.error(f'Invalid mode: {mode}')
             raise ValueError(f'Invalid mode: {mode}')
+
         self.mode = mode
 
 
@@ -18,5 +23,7 @@ class OutputHandler:
         if output['non_found']:
             message.append(f"Here are the elements that could not be"
                        f" found and their index number: {dict(output['non_found'])}")
+
         new_line = '\n'.join(message)
+        logger.info('Friendly output handled successfully.')
         return new_line

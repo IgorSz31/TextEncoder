@@ -1,3 +1,4 @@
+import logging
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (QApplication, QWidget,
                                QMainWindow, QPushButton,
@@ -5,6 +6,7 @@ from PySide6.QtWidgets import (QApplication, QWidget,
 import sys
 from src.binary_converter import BinaryConverter
 
+logger = logging.getLogger(__name__)
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -36,6 +38,8 @@ class MainWindow(QMainWindow):
 
 
         self.setCentralWidget(container)
+
+        logger.info('App layout loaded successfully')
 
     def btn_clicked(self):
         x = self.converter.user_words_iterator(self.input.text())

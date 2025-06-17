@@ -7,11 +7,12 @@ from src.program_status import Status, ErrorMessage
 from ui.ui_manager import MainWindow
 from logs.logger_config import setup_logger
 
-setup_logger()
+logger = logging.getLogger(__name__)
+
 
 
 def main():
-    logger = logging.getLogger(__name__)
+    setup_logger()
     converter = BinaryConverter()
     x = converter.user_words_iterator(input("Enter a word [ exit() to leave ]: "))
     print(x['status'], x['output'])
@@ -23,10 +24,11 @@ if __name__ == "__main__":
                         help='Starts program in command line', default = 'console')
     args = parser.parse_args()
     if args.mode == 'console':
+        logger.info('Program opened in console mode')
         while True:
             main()
-        logger.info('App booted in console mode')
     elif args.mode == 'ui':
+        logger.info('Program opened in UI mode')
 
         from PySide6.QtWidgets import QApplication
         app = QApplication(sys.argv)
@@ -36,5 +38,6 @@ if __name__ == "__main__":
         sys.exit(app.exec())
 
     else:
+        logger.error(f'Invalid mode: {args.mode} provided')
         print('Invalid mode')
         sys.exit(0)

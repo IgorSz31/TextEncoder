@@ -38,5 +38,4 @@ BINARY_LETTER_TABLE = {
 
     # Symbols
     ' ': '00100000'
-
     }

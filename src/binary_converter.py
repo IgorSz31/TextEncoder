@@ -2,7 +2,9 @@ from collections import defaultdict
 from src.output_handler import OutputHandler
 from src.constants import BINARY_LETTER_TABLE
 from src.program_status import Status, ErrorMessage
+import logging
 
+logger = logging.getLogger(__name__)
 
 class BinaryConverter:
 
@@ -16,6 +18,7 @@ class BinaryConverter:
         Searchers for provided symbol in the BINARY_LETTER_TABLE and returns its value
         """
         converted_letter = self.binary_letter_table[letter] + ' '
+        logger.info(f'Single letter: {letter} converted successfully')
         return converted_letter
 
     def letter_list_create(self, word: str) -> list:
@@ -23,6 +26,7 @@ class BinaryConverter:
         Creates a list of all letters in the given word
         """
         letter_list = [letter for letter in word]
+        logger.info('Letter list created successfully')
         return letter_list
 
     def symbol_presence_validate(self, letter: str) -> bool:
@@ -30,8 +34,10 @@ class BinaryConverter:
         Returns a bool basing on whether the given letter is present in the BINARY_LETTER_TABLE
         """
         if letter in self.binary_letter_table:
+            logger.info(f'Symbol presence: {letter} validated successfully')
             return True
         else:
+            logger.info(f'Symbol presence: {letter} not validated')
             return False
 
     def user_words_iterator(self, word: str) -> dict:
@@ -39,21 +45,25 @@ class BinaryConverter:
         Returns provided string in the utf-8 code
         """
         if word == '':
+            logger.error('Provided string is empty')
             return {'status':Status.ERROR.value, 'output':ErrorMessage.EMPTYSTRING.value}
-            # self.output_handler.handle_empty_input()
         if word == 'exit()':
+            logger.info('Exited the program successfully')
             exit()
         output = {'found': '', 'non_found': defaultdict(list)}
+
 
         letter_table = self.letter_list_create(word)
         for index,letter in enumerate(letter_table):
 
             if self.symbol_presence_validate(letter):
                 output['found'] += self.single_letter_convert(letter)
+                logger.info(f'Added {letter} to output')
                 ' '.join(output)
             else:
                  output['non_found'][letter].append(index)
 
+        logger.info('User words iteration done successfully')
         return {'status': Status.SUCCESS.value,
                 'output':self.output_handler.friendly_output_handler(output)}
 
