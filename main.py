@@ -12,17 +12,19 @@ logger = logging.getLogger(__name__)
 
 
 def main():
-    setup_logger()
     converter = BinaryConverter()
     x = converter.user_words_iterator(input("Enter a word [ exit() to leave ]: "))
     print(x['status'], x['output'])
 
 
 if __name__ == "__main__":
+    setup_logger()
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-m','--mode', choices = ['console', 'ui'] ,
                         help='Starts program in command line', default = 'console')
     args = parser.parse_args()
+
     if args.mode == 'console':
         logger.info('Program opened in console mode')
         while True:
