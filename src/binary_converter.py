@@ -1,7 +1,8 @@
 from collections import defaultdict
 from src.output_handler import OutputHandler
-from src.constants import BINARY_LETTER_TABLE
+from src.utils.constants import BINARY_LETTER_TABLE
 from src.program_status import Status, ErrorMessage
+from src.table_handler import TableHandler
 import logging
 
 logger = logging.getLogger(__name__)
@@ -11,13 +12,14 @@ class BinaryConverter:
     def __init__(self):
         self.binary_letter_table = BINARY_LETTER_TABLE
         self.output_handler = OutputHandler()
+        self.table_handler = TableHandler()
 
 
     def single_letter_convert(self, letter: str) -> str:
         """
         Searchers for provided symbol in the BINARY_LETTER_TABLE and returns its value
         """
-        converted_letter = self.binary_letter_table[letter] + ' '
+        converted_letter = self.table_handler.letter_convert(letter)  + ' '
         logger.info(f'Single letter: {letter} converted successfully')
         return converted_letter
 

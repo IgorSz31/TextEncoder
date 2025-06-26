@@ -49,7 +49,7 @@ class MainWindow(QMainWindow):
         Starts convertion mechanism. Reffered to by event listener
         """
         x = self.converter.user_words_iterator(self.input.text())
-        self.label.setText(f'{x['status']} {x['output']}')
+        self.label.setText(f'{x['output']}')
         self.label.setWordWrap(True)
 
 # if __name__ == "__main__":
