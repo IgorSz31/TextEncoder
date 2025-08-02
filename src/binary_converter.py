@@ -1,8 +1,8 @@
 from collections import defaultdict
 from src.output_handler import OutputHandler
-from src.utils.constants import BINARY_LETTER_TABLE
+from .utils.constants import BINARY_LETTER_TABLE
 from src.program_status import Status, ErrorMessage
-from src.table_handler import TableHandler
+from .table_handler import TableHandler
 import logging
 
 logger = logging.getLogger(__name__)
@@ -31,21 +31,23 @@ class BinaryConverter:
         logger.info('Letter list created successfully')
         return letter_list
 
-    def symbol_presence_validate(self, letter: str) -> bool:
-        """
-        Returns a bool basing on whether the given letter is present in the BINARY_LETTER_TABLE
-        """
-        if letter in self.binary_letter_table:
-            logger.info(f'Symbol presence: {letter} validated successfully')
-            return True
-        else:
-            logger.info(f'Symbol presence: {letter} not validated')
-            return False
+    # def symbol_presence_validate(self, letter: str) -> bool:
+    #     """
+    #     Returns a bool basing on whether the given letter is present in the BINARY_LETTER_TABLE
+    #     """
+    #     if letter in self.binary_letter_table:
+    #         logger.info(f'Symbol presence: {letter} validated successfully')
+    #         return True
+    #     else:
+    #         logger.info(f'Symbol presence: {letter} not validated')
+    #         return False
 
     def user_words_iterator(self, word: str) -> dict:
         """
         Returns provided string in the utf-8 code
         """
+
+
         if word == '':
             logger.error('Provided string is empty')
             return {'status':Status.ERROR.value, 'output':ErrorMessage.EMPTYSTRING.value}
@@ -58,7 +60,7 @@ class BinaryConverter:
         letter_table = self.letter_list_create(word)
         for index,letter in enumerate(letter_table):
 
-            if self.symbol_presence_validate(letter):
+            if self.table_handler.symbol_presence_validate(letter):
                 output['found'] += self.single_letter_convert(letter)
                 logger.info(f'Added {letter} to output')
                 ' '.join(output)
