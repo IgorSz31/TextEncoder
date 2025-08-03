@@ -18,3 +18,11 @@ class TableHandler:
        except KeyError:
            logger.info(f'Symbol presence: {letter} not validated')
            return False
+
+    def reverse_table(self):
+        reversed_table = {v: k for k, v in BINARY_LETTER_TABLE.items()}
+        return reversed_table
+
+
+
+
